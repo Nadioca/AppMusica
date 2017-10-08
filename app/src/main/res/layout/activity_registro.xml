@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/fondo_principal"
+    tools:context="com.example.besay.appmusica.RegistroActivity">
+
+    <TextView
+        android:id="@+id/tituloLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlanco"
+        android:layout_marginTop="40dp"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:text="@string/titulo_login" />
+
+    <EditText
+        android:id="@+id/registroCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/colorBlanco"
+        android:textColorHint="@color/colorBlanco"
+        android:layout_marginTop="20dp"
+        android:hint="Introduce tu correo" />
+
+    <EditText
+        android:id="@+id/nombreRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textFilter"
+        android:textColor="@color/colorBlanco"
+        android:textColorHint="@color/colorBlanco"
+        android:layout_marginTop="20dp"
+        android:hint="Introduce tu nombre completo" />
+
+    <EditText
+        android:id="@+id/claveRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:textColor="@color/colorBlanco"
+        android:hint="Introduce tu Contraseña"
+        android:textColorHint="@color/colorBlanco"
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword" />
+
+    <RadioGroup
+        android:id="@+id/radioSexo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        >
+
+        <RadioButton
+            android:id="@+id/sexoHombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textColor="@color/colorBlanco"
+            android:buttonTint="@color/colorBlanco"
+            android:textColorHint="@color/colorBlanco"
+            android:text="Hombre" />
+
+        <RadioButton
+            android:id="@+id/sexoMujer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlanco"
+            android:buttonTint="@color/colorBlanco"
+            android:textColorHint="@color/colorBlanco"
+            android:text="Mujer" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlanco"
+        android:textColorHint="@color/colorBlanco"
+        android:buttonTint="@color/colorBlanco"
+        android:layout_marginTop="20dp"
+        android:text="Acepto las condiciones de privacidad" />
+
+    <Button
+        android:id="@+id/botonRegistrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlanco"
+        android:textColorHint="@color/colorBlanco"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Registro" />
+
+</LinearLayout>
