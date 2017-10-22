@@ -97,9 +97,11 @@ public class RegistroActivity extends AppCompatActivity {
 
                 Usuario usuario = new Usuario(registroCorreo,nombreRegistro,claveRegistro,sexoSeleccionado);
 
-                Intent intent = new Intent(contexto, PerfilActivity.class);
+                Intent intent = new Intent(contexto, PrincipalActivity.class);
                 intent.putExtra("usuario", usuario);
                 startActivity(intent);
+
+                //Nota: De momento, como no guarda en base de datos, voy a cargar siempre un usuario estandar y no el que registramos
 
             }
         });

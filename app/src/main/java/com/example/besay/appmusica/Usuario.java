@@ -87,4 +87,7 @@ public class Usuario implements Parcelable {
         dest.writeString(clave);
         dest.writeString(sexo);
     }
+
+
+
 }

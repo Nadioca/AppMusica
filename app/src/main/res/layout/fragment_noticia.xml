@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TableRow
+            android:id="@+id/row1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="78dp"
+                    android:layout_height="78dp"
+                    app:srcCompat="@drawable/cd4" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_toEndOf="@+id/imageView1"
+                    android:layout_toRightOf="@+id/imageView1"
+                    android:text="Ya disponible el nuevo CD de Elvis" />
+
+                <Button
+                    android:id="@+id/botonElvis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageView1"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="Ver Más" />
+
+
+            </RelativeLayout>
+        </TableRow>
+
+        <View
+            style="@style/Divider"
+            android:layout_alignBottom="@+id/row1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <TableRow
+            android:id="@+id/row2">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="78dp"
+                    android:layout_height="78dp"
+                    app:srcCompat="@drawable/cd_1" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Top 10 CDs Octubre"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imageView2"
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginStart="28dp" />
+
+                <Button
+                    android:id="@+id/botonTop10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ver Más"
+                    android:layout_alignBottom="@+id/imageView2"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+        </TableRow>
+
+        <View
+            style="@style/Divider"
+            android:layout_alignBottom="@+id/row2"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+    </TableLayout>
+
+
+
+
+
+
+</RelativeLayout>

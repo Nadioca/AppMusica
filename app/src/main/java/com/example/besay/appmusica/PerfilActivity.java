@@ -7,6 +7,10 @@ import android.widget.TextView;
 
 public class PerfilActivity extends AppCompatActivity {
 
+    //temporal hasta que haya base de datos
+
+    Usuario usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -14,7 +18,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
 
-        Usuario usuario = intent.getParcelableExtra("usuario");
+        usuario = intent.getParcelableExtra("usuario");
 
         TextView Username = (TextView) findViewById(R.id.userName);
         Username.setText(usuario.getCorreo());
@@ -27,6 +31,13 @@ public class PerfilActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        intent.putExtra("usuario", usuario);
+        startActivity(intent);
 
+    }
 
 }

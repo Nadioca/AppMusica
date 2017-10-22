@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(contexto,"Proximamente...",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(contexto, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

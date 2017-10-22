@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20px"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.besay.appmusica.Top10Activity"
+    tools:showIn="@layout/activity_top10">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:text="A continuación te mostramos la lista de los más escuchados en AppMusic:\n\n1) Maxima Compilation \n2) Imagine Dragons \n3)Muse \n4) Linking Park \n5) System of a Dawn" />
+
+
+</LinearLayout>
