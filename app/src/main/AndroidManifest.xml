@@ -55,6 +55,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.besay.appmusica.MultiTabsActivity" />
         </activity>
+        <activity
+            android:name=".ElvisActivity"
+            android:label="@string/title_Elvis"
+            android:parentActivityName=".MultiTabsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.besay.appmusica.MultiTabsActivity" />
+        </activity>
+        <activity android:name=".AyudaActivity"
+            android:label="@string/title_Ayuda"
+            android:parentActivityName=".PrincipalActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PrincipalActivity" />
+    </activity>
     </application>
 
 </manifest>

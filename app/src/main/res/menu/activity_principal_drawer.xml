@@ -9,7 +9,7 @@
         <item
             android:id="@+id/nav_noticias_tab"
             android:icon="@drawable/ic_notifications_active"
-            android:title="Noticias" />
+            android:title="Music World" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
@@ -41,7 +41,7 @@
                 android:title="Share" />
             <item
                 android:id="@+id/nav_cerrar"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_exit_to_app"
                 android:title="Cerrar Sesión" />
         </menu>
     </item>

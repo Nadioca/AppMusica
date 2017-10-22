@@ -23,24 +23,17 @@ import java.util.List;
 
 public class NoticiaFragment extends Fragment {
 
-    MediaPlayer mPlayer = new MediaPlayer();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_noticia, container, false);
 
         Button botonElvis = (Button) rootView.findViewById(R.id.botonElvis);
-        mPlayer = MediaPlayer.create(getContext(),R.raw.elvis);
         botonElvis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(mPlayer.isPlaying()){
-                    mPlayer.pause();
-                } else {
-                    mPlayer.start();
-                }
-
+                Intent intent = new Intent(getContext(), ElvisActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.besay.appmusica.PrincipalActivity"
     android:orientation="vertical"
-    android:padding="20dp"
-    tools:showIn="@layout/app_bar_principal">
+    android:padding="16dp"
+    android:background="@drawable/fondo_principal"
+    tools:context="com.example.besay.appmusica.AyudaActivity">
 
     <TextView
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Aquí irá más adelante las categías y demás"/>
+        android:textColor="@color/colorBlanco"
+        android:text="@string/texto_Ayuda"/>
 
 </LinearLayout>
