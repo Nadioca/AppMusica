@@ -34,4 +34,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_top10">Nuestro Top 10</string>
+
+
+    <string name="sin_datos">Sin datos.</string>
+
+    <string name="progress_cargando_datos">Cargando datos&#8230;</string>
+
+    <string name="campo_requerido">Campo Requerido</string>
+
+    <string name="ciclo_nombre">Nombre</string>
+    <string name="ciclo_abreviatura">Abreviatura</string>
 </resources>

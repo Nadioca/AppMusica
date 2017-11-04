@@ -70,6 +70,45 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".PrincipalActivity" />
     </activity>
+        <activity
+            android:name=".musica.CicloActivity"
+            android:label="Mi Música"
+            android:parentActivityName=".PrincipalActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.besay.appmusica.PrincipalActivity" />
+        </activity>
+
+        <activity
+            android:name=".musica.CicloInsercionActivity"
+            android:parentActivityName=".musica.CicloActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".musica.CicloActivity" />
+        </activity>
+
+        <activity
+            android:name=".musica.CicloActualizacionActivity"
+            android:parentActivityName=".musica.CicloActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".musica.CicloActivity" />
+        </activity>
+
+        <provider
+            android:name=".proveedor.ProveedorDeContenido"
+            android:authorities="com.example.besay.appmusica.proveedor.ProveedorDeContenido"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

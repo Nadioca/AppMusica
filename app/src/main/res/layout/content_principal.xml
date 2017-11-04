@@ -12,7 +12,14 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="Aquí irá más adelante las categías y demás"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver toda la Música"
+        android:id="@+id/buttonIrAMiMusica"/>
 
 </LinearLayout>

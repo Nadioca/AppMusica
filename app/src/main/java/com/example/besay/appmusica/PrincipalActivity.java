@@ -16,8 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.besay.appmusica.musica.CicloActivity;
 
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -67,6 +70,15 @@ public class PrincipalActivity extends AppCompatActivity
         TextView correoUsuario = (TextView) navcabecera.findViewById(R.id.CorreoUsuario);
         correoUsuario.setText(usuario.getCorreo());
         //correoUsuario.setText("nadioca.gr@gmail.com");
+
+        Button button = (Button) findViewById(R.id.buttonIrAMiMusica);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(contexto, CicloActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
