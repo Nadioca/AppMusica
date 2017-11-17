@@ -22,4 +22,25 @@
         android:text="Ver toda la Música"
         android:id="@+id/buttonIrAMiMusica"/>
 
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Saca una captura"
+        android:id="@+id/buttonAniadirFoto"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Elegir foto de la Galería"
+        android:id="@+id/botonIrGaleria"/>
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/view_mi_foto"
+        android:src="@drawable/ic_photo_camera_black_24dp" />
+
 </LinearLayout>

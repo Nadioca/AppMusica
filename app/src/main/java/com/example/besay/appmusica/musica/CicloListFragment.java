@@ -26,9 +26,12 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.besay.appmusica.R;
 import com.example.besay.appmusica.constantes.Constantes;
+import com.example.besay.appmusica.constantes.Utilidades;
 import com.example.besay.appmusica.pojos.Musica;
 import com.example.besay.appmusica.proveedor.Contrato;
 import com.example.besay.appmusica.proveedor.MusicaProveedor;
+
+import java.io.FileNotFoundException;
 
 
 public class CicloListFragment extends ListFragment
@@ -209,23 +212,31 @@ public class CicloListFragment extends ListFragment
 			int ID = cursor.getInt(cursor.getColumnIndex(Contrato.Musica._ID));
 			String nombre = cursor.getString(cursor.getColumnIndex(Contrato.Musica.NOMBRE));
 			String abreviatura = cursor.getString(cursor.getColumnIndex(Contrato.Musica.COMPA));
-	
+
 			TextView textviewNombre = (TextView) view.findViewById(R.id.textview_ciclo_list_item_nombre);
 			textviewNombre.setText(nombre);
 
 			TextView textviewAbreviatura = (TextView) view.findViewById(R.id.textview_ciclo_list_item_abreviatura);
 			textviewAbreviatura.setText(abreviatura);
 
-			ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
-			int color = generator.getColor(abreviatura); //Genera un color según el nombre
-			TextDrawable drawable = TextDrawable.builder()
-					.buildRound(abreviatura.substring(0,1), color);
-
 			ImageView image = (ImageView) view.findViewById(R.id.image_view);
-			image.setImageDrawable(drawable);
+
+			try {
+				Utilidades.loadImageFromStorage(getActivity(), "img_" + ID + ".jpg", image);
+			} catch (FileNotFoundException e) {
+				ponerImagenDeLetra(abreviatura, image);
+			}
 
 			view.setTag(ID);
 
+		}
+
+		private void ponerImagenDeLetra(String abreviatura, ImageView image) {
+			ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
+			int color = generator.getColor(abreviatura); //Genera un color según el nombre
+			TextDrawable drawable = TextDrawable.builder()
+					.buildRound(abreviatura.substring(0, 1), color);
+			image.setImageDrawable(drawable);
 		}
 
 		@Override

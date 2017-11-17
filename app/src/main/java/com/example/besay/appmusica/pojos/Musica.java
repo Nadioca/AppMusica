@@ -1,5 +1,7 @@
 package com.example.besay.appmusica.pojos;
 
+import android.graphics.Bitmap;
+
 import com.example.besay.appmusica.constantes.Constantes;
 
 /**
@@ -11,17 +13,20 @@ public class Musica {
         private int ID;
         private String nombre;
         private String abreviatura;
+    private Bitmap imagen;
 
         public Musica(){
             this.ID = Constantes.SIN_VALOR_INT;
             this.nombre = Constantes.SIN_VALOR_STRING;
             this.setAbreviatura(Constantes.SIN_VALOR_STRING);
+            this.setImagen(null);
         };
 
-        public Musica(int ID, String nombre, String abreviatura) {
+        public Musica(int ID, String nombre, String abreviatura, Bitmap imagen) {
             this.ID = ID;
             this.nombre = nombre;
             this.setAbreviatura(abreviatura);
+            this.setImagen(imagen);
         }
 
         public int getID() {
@@ -47,5 +52,13 @@ public class Musica {
         public void setAbreviatura(String abreviatura) {
             this.abreviatura = abreviatura;
         }
+
+    public Bitmap getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Bitmap imagen) {
+        this.imagen = imagen;
+    }
 
 }

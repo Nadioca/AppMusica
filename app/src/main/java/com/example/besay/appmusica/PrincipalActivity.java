@@ -3,29 +3,39 @@ package com.example.besay.appmusica;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.besay.appmusica.constantes.Utilidades;
 import com.example.besay.appmusica.musica.CicloActivity;
+
+import java.io.IOException;
 
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Activity contexto;
+    final int PETICION_SACAR_FOTO = 1;
+    final int PETICION_GALERIA = 2;
+    ImageView imageView;
 
     //temporal hasta que haya base de datos
     //final Usuario usuario = new Usuario("nadioca.gr@gmail.com", "Acoidan", "123456", "Hombre");
@@ -80,6 +90,68 @@ public class PrincipalActivity extends AppCompatActivity
             }
         });
 
+        Button sacarfoto = (Button) findViewById(R.id.buttonAniadirFoto);
+        sacarfoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               sacarFoto();
+
+            }
+        });
+
+        Button iragaleria = (Button) findViewById(R.id.botonIrGaleria);
+        iragaleria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                elegirDeGaleria();
+
+            }
+        });
+
+        imageView = (ImageView) findViewById(R.id.view_mi_foto);
+
+    }
+
+    public void sacarFoto(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, PETICION_SACAR_FOTO);
+    }
+
+    public void elegirDeGaleria(){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, PETICION_GALERIA);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode){
+            case PETICION_SACAR_FOTO:
+                if(resultCode == RESULT_OK){
+                    Bitmap foto = (Bitmap)data.getExtras().get("data");
+                    imageView.setImageBitmap(foto);
+                    try {
+                        Utilidades.storeImage (foto, this, "imagen.jpg");
+                    } catch (IOException e) {
+                        Toast.makeText(getApplicationContext(),"Error: No se pudo guardar la foto", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    //el usuario cancela
+                    Toast.makeText(getApplicationContext(),"Cancelado", Toast.LENGTH_LONG).show();
+                }
+                break;
+
+            case PETICION_GALERIA:
+                if(resultCode == RESULT_OK){
+                    Uri uri = data.getData();
+                    imageView.setImageURI(uri);
+                }
+                break;
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
