@@ -10,48 +10,59 @@ import com.example.besay.appmusica.constantes.Constantes;
 
 public class Musica {
 
-        private int ID;
-        private String nombre;
-        private String abreviatura;
+    private int id_musica;
+    private String titulo;
+    private String autor;
+    private String categoria;
     private Bitmap imagen;
 
-        public Musica(){
-            this.ID = Constantes.SIN_VALOR_INT;
-            this.nombre = Constantes.SIN_VALOR_STRING;
-            this.setAbreviatura(Constantes.SIN_VALOR_STRING);
-            this.setImagen(null);
-        };
+    public Musica() {
+        this.id_musica = Constantes.SIN_VALOR_INT;
+        this.titulo = Constantes.SIN_VALOR_STRING;
+        this.setAutor(Constantes.SIN_VALOR_STRING);
+        this.setCategoria(Constantes.SIN_VALOR_STRING);
+        this.setImagen(null);
+    }
 
-        public Musica(int ID, String nombre, String abreviatura, Bitmap imagen) {
-            this.ID = ID;
-            this.nombre = nombre;
-            this.setAbreviatura(abreviatura);
-            this.setImagen(imagen);
-        }
+    public Musica(int ID, String nombre, String abreviatura, String categoria, Bitmap imagen) {
+        this.id_musica = ID;
+        this.titulo = nombre;
+        this.setAutor(abreviatura);
+        this.setCategoria(categoria);
+        this.setImagen(imagen);
+    }
 
-        public int getID() {
-            return ID;
-        }
+    public String getCategoria() {
+        return categoria;
+    }
 
-        public void setID(int ID) {
-            this.ID = ID;
-        }
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
-        public String getNombre() {
-            return nombre;
-        }
+    public int getId_musica() {
+        return id_musica;
+    }
 
-        public void setNombre(String nombre) {
-            this.nombre = nombre;
-        }
+    public void setId_musica(int id_musica) {
+        this.id_musica = id_musica;
+    }
 
-        public String getAbreviatura() {
-            return abreviatura;
-        }
+    public String getTitulo() {
+        return titulo;
+    }
 
-        public void setAbreviatura(String abreviatura) {
-            this.abreviatura = abreviatura;
-        }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
 
     public Bitmap getImagen() {
         return imagen;

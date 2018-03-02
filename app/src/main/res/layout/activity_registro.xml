@@ -41,7 +41,7 @@
         android:textColor="@color/colorBlanco"
         android:textColorHint="@color/colorBlanco"
         android:layout_marginTop="20dp"
-        android:hint="Introduce tu nombre completo" />
+        android:hint="Introduce tu titulo completo" />
 
     <EditText
         android:id="@+id/claveRegistro"

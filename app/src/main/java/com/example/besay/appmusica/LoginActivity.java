@@ -2,8 +2,8 @@ package com.example.besay.appmusica;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //esto es temporal hasta que haya base de datos
                 //final Usuario usuario = new Usuario ("nadioca.gr@gmail.com", "Acoidan","123456", "Hombre");
+
                 Intent intent = new Intent(contexto, PrincipalActivity.class);
                 intent.putExtra("usuario", Acoidan);
                 startActivity(intent);

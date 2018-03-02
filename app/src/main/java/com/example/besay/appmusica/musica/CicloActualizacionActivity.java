@@ -151,7 +151,7 @@ public class CicloActualizacionActivity extends AppCompatActivity {
             return;
         }
 
-        Musica ciclo = new Musica(cicloId, nombre, abreviatura, foto);
+        Musica ciclo = new Musica(cicloId, nombre, abreviatura, "dance", foto);
         MusicaProveedor.update(getContentResolver(), ciclo, this);
         finish();
     }

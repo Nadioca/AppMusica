@@ -145,10 +145,10 @@ public class CicloListFragment extends ListFragment
 					cicloId = (Integer) viewSeleccionado.getTag();
 					Log.i("El identificador 1", "kk"+cicloId);
 					Musica ciclo = MusicaProveedor.read(getActivity().getContentResolver(), cicloId);
-					Log.i("El identificador", ciclo.getNombre());
-					intent.putExtra("ID", ciclo.getID());
-					intent.putExtra("Nombre", ciclo.getNombre());
-					intent.putExtra("Abreviatura", ciclo.getAbreviatura());
+					Log.i("El identificador", ciclo.getTitulo());
+					intent.putExtra("ID", ciclo.getId_musica());
+					intent.putExtra("Nombre", ciclo.getTitulo());
+					intent.putExtra("Abreviatura", ciclo.getAutor());
 					startActivity(intent);
 					break;
 				default:

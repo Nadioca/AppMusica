@@ -136,7 +136,7 @@ public class CicloInsercionActivity extends AppCompatActivity {
             return;
         }
 
-        Musica ciclo = new Musica(Constantes.SIN_VALOR_INT, nombre, abreviatura, foto);
+        Musica ciclo = new Musica(Constantes.SIN_VALOR_INT, nombre, abreviatura, "dance", foto);
         MusicaProveedor.insert(getContentResolver(),ciclo, this);
         finish();
     }

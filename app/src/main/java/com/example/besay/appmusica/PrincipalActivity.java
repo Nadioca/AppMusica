@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +28,11 @@ import android.widget.Toast;
 
 import com.example.besay.appmusica.constantes.Utilidades;
 import com.example.besay.appmusica.musica.CicloActivity;
+import com.example.besay.appmusica.pojos.Musica;
+import com.example.besay.appmusica.rest.MusicaRest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -110,6 +115,39 @@ public class PrincipalActivity extends AppCompatActivity
 
         imageView = (ImageView) findViewById(R.id.view_mi_foto);
 
+        Button botonDescarga = (Button) findViewById(R.id.buttonIrAMiMusicaWeb);
+        botonDescarga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                descargarDatos();
+            }
+        });
+
+    }
+
+    void descargarDatos(){
+        new DescargarDatosTask().execute();
+    }
+
+    class DescargarDatosTask extends AsyncTask<Void,Void,ArrayList<Musica>> {
+
+        @Override
+        protected ArrayList<Musica> doInBackground(Void... voids) {
+            ArrayList<Musica> musicas = MusicaRest.getAllMusica();
+            Log.i("WS: ","llegó al doInBackground");
+            return musicas;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Musica> musicas) {
+            super.onPostExecute(musicas);
+            Log.i("WS: ","onPostExecute");
+            for(Musica i : musicas){
+                TextView textView = (TextView) findViewById(R.id.textoDescargado);
+                String txt = textView.getText().toString();
+                textView.setText(txt + "\n" + i.getTitulo() + " , " + i.getAutor());
+            }
+        }
     }
 
     public void sacarFoto(){

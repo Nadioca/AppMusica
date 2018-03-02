@@ -18,8 +18,8 @@ public class MusicaProveedor {
         Uri uri = Contrato.Musica.CONTENT_URI;
 
         ContentValues values = new ContentValues();
-        values.put(Contrato.Musica.NOMBRE, ciclo.getNombre());
-        values.put(Contrato.Musica.COMPA, ciclo.getAbreviatura());
+        values.put(Contrato.Musica.NOMBRE, ciclo.getTitulo());
+        values.put(Contrato.Musica.COMPA, ciclo.getAutor());
 
         Uri returnUri = resolvedor.insert(uri, values);
 
@@ -38,17 +38,17 @@ public class MusicaProveedor {
     }
 
     static public void update(ContentResolver resolver, Musica ciclo, Context contexto){
-        Uri uri = Uri.parse(Contrato.Musica.CONTENT_URI + "/" + ciclo.getID());
+        Uri uri = Uri.parse(Contrato.Musica.CONTENT_URI + "/" + ciclo.getId_musica());
 
         ContentValues values = new ContentValues();
-        values.put(Contrato.Musica.NOMBRE, ciclo.getNombre());
-        values.put(Contrato.Musica.COMPA, ciclo.getAbreviatura());
+        values.put(Contrato.Musica.NOMBRE, ciclo.getTitulo());
+        values.put(Contrato.Musica.COMPA, ciclo.getAutor());
 
         resolver.update(uri, values, null, null);
 
         if(ciclo.getImagen()!=null){
             try {
-                Utilidades.storeImage(ciclo.getImagen(), contexto, "img_" + ciclo.getID() + ".jpg");
+                Utilidades.storeImage(ciclo.getImagen(), contexto, "img_" + ciclo.getId_musica() + ".jpg");
             } catch (IOException e) {
                 Toast.makeText(contexto, "Hubo un error al guardar la imagen", Toast.LENGTH_LONG).show();
             }
@@ -66,9 +66,9 @@ public class MusicaProveedor {
 
         if (cursor.moveToFirst()){
             Musica ciclo = new Musica();
-            ciclo.setID(cursor.getInt(cursor.getColumnIndex(Contrato.Musica._ID)));
-            ciclo.setNombre(cursor.getString(cursor.getColumnIndex(Contrato.Musica.NOMBRE)));
-            ciclo.setAbreviatura(cursor.getString(cursor.getColumnIndex(Contrato.Musica.COMPA)));
+            ciclo.setId_musica(cursor.getInt(cursor.getColumnIndex(Contrato.Musica._ID)));
+            ciclo.setTitulo(cursor.getString(cursor.getColumnIndex(Contrato.Musica.NOMBRE)));
+            ciclo.setAutor(cursor.getString(cursor.getColumnIndex(Contrato.Musica.COMPA)));
             return ciclo;
         }
 
