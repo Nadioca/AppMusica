@@ -12,31 +12,31 @@ public class Musica {
 
     private int id_musica;
     private String titulo;
-    private String autor;
-    private String categoria;
+    private String compa;
+    private Categorias categoria;
     private Bitmap imagen;
 
     public Musica() {
         this.id_musica = Constantes.SIN_VALOR_INT;
         this.titulo = Constantes.SIN_VALOR_STRING;
-        this.setAutor(Constantes.SIN_VALOR_STRING);
-        this.setCategoria(Constantes.SIN_VALOR_STRING);
+        this.setCompa(Constantes.SIN_VALOR_STRING);
+        this.setCategoria(null);
         this.setImagen(null);
     }
 
-    public Musica(int ID, String nombre, String abreviatura, String categoria, Bitmap imagen) {
+    public Musica(int ID, String nombre, String abreviatura, Categorias categoria, Bitmap imagen) {
         this.id_musica = ID;
         this.titulo = nombre;
-        this.setAutor(abreviatura);
-        this.setCategoria(categoria);
+        this.setCompa(abreviatura);
+        this.categoria = categoria;
         this.setImagen(imagen);
     }
 
-    public String getCategoria() {
+    public Categorias getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categorias categoria) {
         this.categoria = categoria;
     }
 
@@ -56,12 +56,12 @@ public class Musica {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getCompa() {
+        return compa;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setCompa(String compa) {
+        this.compa = compa;
     }
 
     public Bitmap getImagen() {

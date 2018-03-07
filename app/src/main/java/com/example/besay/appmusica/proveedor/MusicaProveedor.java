@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import com.example.besay.appmusica.constantes.Utilidades;
+import com.example.besay.appmusica.pojos.Categorias;
 import com.example.besay.appmusica.pojos.Musica;
 
 import java.io.IOException;
@@ -19,7 +20,8 @@ public class MusicaProveedor {
 
         ContentValues values = new ContentValues();
         values.put(Contrato.Musica.NOMBRE, ciclo.getTitulo());
-        values.put(Contrato.Musica.COMPA, ciclo.getAutor());
+        values.put(Contrato.Musica.COMPA, ciclo.getCompa());
+        values.put(Contrato.Musica.ID_CATEGORIA, ciclo.getCategoria().getID());
 
         Uri returnUri = resolvedor.insert(uri, values);
 
@@ -42,7 +44,8 @@ public class MusicaProveedor {
 
         ContentValues values = new ContentValues();
         values.put(Contrato.Musica.NOMBRE, ciclo.getTitulo());
-        values.put(Contrato.Musica.COMPA, ciclo.getAutor());
+        values.put(Contrato.Musica.COMPA, ciclo.getCompa());
+        values.put(Contrato.Musica.ID_CATEGORIA, ciclo.getCategoria().getID());
 
         resolver.update(uri, values, null, null);
 
@@ -60,7 +63,9 @@ public class MusicaProveedor {
 
         String[] projection = {Contrato.Musica._ID,
                 Contrato.Musica.NOMBRE,
-                Contrato.Musica.COMPA};
+                Contrato.Musica.COMPA,
+                Contrato.Musica.ID_CATEGORIA
+        };
 
         Cursor cursor = resolver.query(uri, projection, null, null, null);
 
@@ -68,7 +73,12 @@ public class MusicaProveedor {
             Musica ciclo = new Musica();
             ciclo.setId_musica(cursor.getInt(cursor.getColumnIndex(Contrato.Musica._ID)));
             ciclo.setTitulo(cursor.getString(cursor.getColumnIndex(Contrato.Musica.NOMBRE)));
-            ciclo.setAutor(cursor.getString(cursor.getColumnIndex(Contrato.Musica.COMPA)));
+            ciclo.setCompa(cursor.getString(cursor.getColumnIndex(Contrato.Musica.COMPA)));
+
+            int categoriaID = cursor.getInt(cursor.getColumnIndex(Contrato.Musica.ID_CATEGORIA));
+            Categorias cate = CategoriasProveedor.read(resolver, categoriaID);
+            cate.setID(categoriaID);
+
             return ciclo;
         }
 

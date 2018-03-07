@@ -14,6 +14,18 @@ public class Contrato {
 
         // Table column
         public static final String NOMBRE = "Nombre";
+        public static final String ID_CATEGORIA = "Id_Categoria";
         public static final String COMPA = "Abreviatura";
     }
+
+    public static final class Categorias implements BaseColumns {
+
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://"+AUTHORITY+"/Categorias");
+
+        // Table column
+        public static final String NOMBRE = "Nombre";
+
+    }
+
 }

@@ -51,7 +51,7 @@ public class MusicaRest {
 
                 for( int i=0; i< jsonArray.length(); i++){
                     JSONObject obj = jsonArray.getJSONObject(i);
-                    musicas.add(new Musica(obj.getInt("id_musica"),obj.getString("titulo"), obj.getString("autor"), obj.getString("categoria"),null));
+                    //musicas.add(new Musica(obj.getInt("id_musica"),obj.getString("titulo"), obj.getString("autor"), obj.getString("categoria"),null));
                 }
 
             Log.i("WS: ", "Funciona");

@@ -18,24 +18,35 @@
 			android:layout_marginLeft="@dimen/appbar_padding_top"
 			android:id="@+id/image_view"/>
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="@dimen/appbar_padding_top"
-			android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/appbar_padding_top"
+            android:orientation="vertical">
 
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:id="@+id/textview_ciclo_list_item_abreviatura"
-				android:layout_marginTop="@dimen/appbar_padding_top"
-				android:layout_marginBottom="@dimen/appbar_padding_top"/>
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:id="@+id/textview_ciclo_list_item_nombre"
-				android:layout_marginBottom="@dimen/appbar_padding_top"/>
-		</LinearLayout>
+            <TextView
+                android:id="@+id/textview_ciclo_list_item_nombre"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/appbar_padding_top"
+                android:layout_marginTop="@dimen/appbar_padding_top" />
+
+            <TextView
+                android:id="@+id/textview_ciclo_list_item_abreviatura"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/appbar_padding_top"
+                android:layout_marginTop="8dp" />
+
+
+            <TextView
+                android:id="@+id/textview_ciclo_list_item_categoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/appbar_padding_top" />
+        </LinearLayout>
 	</LinearLayout>
 
 </LinearLayout>

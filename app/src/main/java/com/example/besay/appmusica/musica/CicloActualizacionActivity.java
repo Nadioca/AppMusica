@@ -18,7 +18,9 @@ import android.widget.ImageView;
 import com.example.besay.appmusica.R;
 import com.example.besay.appmusica.constantes.Constantes;
 import com.example.besay.appmusica.constantes.Utilidades;
+import com.example.besay.appmusica.pojos.Categorias;
 import com.example.besay.appmusica.pojos.Musica;
+import com.example.besay.appmusica.proveedor.CategoriasProveedor;
 import com.example.besay.appmusica.proveedor.MusicaProveedor;
 
 import java.io.FileNotFoundException;
@@ -26,6 +28,7 @@ import java.io.FileNotFoundException;
 public class CicloActualizacionActivity extends AppCompatActivity {
     EditText editTextCicloNombre;
     EditText editTextCicloAbreviatura;
+    EditText editTextCicloCategoria;
     int cicloId;
     ImageView imageViewCiclo;
 
@@ -45,10 +48,15 @@ public class CicloActualizacionActivity extends AppCompatActivity {
 
         editTextCicloNombre = (EditText) findViewById(R.id.editTextCicloNombre);
         editTextCicloAbreviatura = (EditText) findViewById(R.id.editTextCicloAbreviatura);
+        editTextCicloCategoria = (EditText) findViewById(R.id.editTextCicloCategoria);
 
         cicloId = this.getIntent().getExtras().getInt("ID");
         editTextCicloNombre.setText(this.getIntent().getExtras().getString("Nombre"));
         editTextCicloAbreviatura.setText(this.getIntent().getExtras().getString("Abreviatura"));
+
+        int categoria = this.getIntent().getExtras().getInt("Id_Categoria");
+
+        editTextCicloCategoria.setText(String.valueOf(categoria));
 
         imageViewCiclo = (ImageView) findViewById(R.id.image_view_ciclo);
 
@@ -136,6 +144,7 @@ public class CicloActualizacionActivity extends AppCompatActivity {
         editTextCicloNombre.setError(null);
         editTextCicloAbreviatura.setError(null);
 
+
         String nombre = String.valueOf(editTextCicloNombre.getText());
         String abreviatura = String.valueOf(editTextCicloAbreviatura.getText());
 
@@ -150,8 +159,12 @@ public class CicloActualizacionActivity extends AppCompatActivity {
             editTextCicloAbreviatura.requestFocus();
             return;
         }
+        Integer categoria = Integer.parseInt(editTextCicloCategoria.getText().toString());
 
-        Musica ciclo = new Musica(cicloId, nombre, abreviatura, "dance", foto);
+        Categorias categorias = CategoriasProveedor.read(getContentResolver(), categoria);
+
+
+        Musica ciclo = new Musica(cicloId, nombre, abreviatura, categorias, foto);
         MusicaProveedor.update(getContentResolver(), ciclo, this);
         finish();
     }

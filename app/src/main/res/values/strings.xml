@@ -44,4 +44,5 @@
 
     <string name="ciclo_nombre">Nombre</string>
     <string name="ciclo_abreviatura">Abreviatura</string>
+    <string name="ciclo_categoria">Categoria</string>
 </resources>

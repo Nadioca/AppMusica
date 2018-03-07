@@ -16,7 +16,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.besay.appmusica.constantes.Constantes;
+import com.example.besay.appmusica.pojos.Categorias;
 import com.example.besay.appmusica.pojos.Musica;
+import com.example.besay.appmusica.proveedor.CategoriasProveedor;
 import com.example.besay.appmusica.proveedor.MusicaProveedor;
 import com.example.besay.appmusica.R;
 
@@ -24,7 +26,10 @@ import com.example.besay.appmusica.R;
 public class CicloInsercionActivity extends AppCompatActivity {
     EditText editTextCicloNombre;
     EditText editTextCicloAbreviatura;
+    EditText editTextCicloCategoria;
+
     ImageView imageViewCiclo;
+
     Bitmap foto = null;
 
     final int PETICION_CAPTURAR_IMAGEN = 1;
@@ -41,6 +46,7 @@ public class CicloInsercionActivity extends AppCompatActivity {
 
         editTextCicloNombre = (EditText) findViewById(R.id.editTextCicloNombre);
         editTextCicloAbreviatura = (EditText) findViewById(R.id.editTextCicloAbreviatura);
+        editTextCicloCategoria = (EditText) findViewById(R.id.editTextCicloCategoria);
 
         imageViewCiclo = (ImageView) findViewById(R.id.image_view_ciclo);
 
@@ -120,9 +126,12 @@ public class CicloInsercionActivity extends AppCompatActivity {
     void attemptGuardar(){
         editTextCicloNombre.setError(null);
         editTextCicloAbreviatura.setError(null);
+        editTextCicloCategoria.setError(null);
 
         String nombre = String.valueOf(editTextCicloNombre.getText());
         String abreviatura = String.valueOf(editTextCicloAbreviatura.getText());
+        String categoria = String.valueOf(editTextCicloCategoria.getText());
+
 
         if(TextUtils.isEmpty(nombre)){
             editTextCicloNombre.setError(getString(R.string.campo_requerido));
@@ -136,8 +145,19 @@ public class CicloInsercionActivity extends AppCompatActivity {
             return;
         }
 
-        Musica ciclo = new Musica(Constantes.SIN_VALOR_INT, nombre, abreviatura, "dance", foto);
-        MusicaProveedor.insert(getContentResolver(),ciclo, this);
+        if(TextUtils.isEmpty(categoria)){
+            editTextCicloCategoria.setError(getString(R.string.campo_requerido));
+            editTextCicloCategoria.requestFocus();
+            return;
+        }
+
+        Integer cat_id = Integer.parseInt(editTextCicloCategoria.getText().toString());
+
+        Categorias categorias = CategoriasProveedor.read(getContentResolver(), cat_id);
+
+        Musica ciclo = new Musica(Constantes.SIN_VALOR_INT, nombre, abreviatura, categorias, foto);
+
+        MusicaProveedor.insert(getContentResolver(), ciclo, this);
         finish();
     }
 }

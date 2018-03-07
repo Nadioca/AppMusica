@@ -145,7 +145,7 @@ public class PrincipalActivity extends AppCompatActivity
             for(Musica i : musicas){
                 TextView textView = (TextView) findViewById(R.id.textoDescargado);
                 String txt = textView.getText().toString();
-                textView.setText(txt + "\n" + i.getTitulo() + " , " + i.getAutor());
+                textView.setText(txt + "\n" + i.getTitulo() + " , " + i.getCompa());
             }
         }
     }
