@@ -1,4 +1,4 @@
-package com.example.besay.appmusica.musica;
+package com.example.besay.appmusica.categorias;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +27,8 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.besay.appmusica.R;
 import com.example.besay.appmusica.constantes.Constantes;
 import com.example.besay.appmusica.constantes.Utilidades;
+import com.example.besay.appmusica.musica.CicloActualizacionActivity;
+import com.example.besay.appmusica.musica.CicloInsercionActivity;
 import com.example.besay.appmusica.pojos.Categorias;
 import com.example.besay.appmusica.pojos.Musica;
 import com.example.besay.appmusica.proveedor.CategoriasProveedor;
@@ -36,7 +38,7 @@ import com.example.besay.appmusica.proveedor.MusicaProveedor;
 import java.io.FileNotFoundException;
 
 
-public class CicloListFragment extends ListFragment
+public class CategoriasListFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
     CicloCursorAdapter mAdapter;
@@ -45,8 +47,8 @@ public class CicloListFragment extends ListFragment
     ActionMode mActionMode;
     View viewSeleccionado;
 
-    public static CicloListFragment newInstance() {
-        CicloListFragment f = new CicloListFragment();
+    public static CategoriasListFragment newInstance() {
+        CategoriasListFragment f = new CategoriasListFragment();
 
         return f;
     }
@@ -74,7 +76,7 @@ public class CicloListFragment extends ListFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case Constantes.INSERTAR:
-                Intent intent = new Intent(getActivity(), CicloInsercionActivity.class);
+                Intent intent = new Intent(getActivity(), CategoriasInsercionActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -90,7 +92,7 @@ public class CicloListFragment extends ListFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Log.i(LOGTAG, "onCreateView");
-        View v = inflater.inflate(R.layout.fragment_ciclo_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_categorias_list, container, false);
 
         mAdapter = new CicloCursorAdapter(getActivity());
         setListAdapter(mAdapter);
@@ -140,18 +142,17 @@ public class CicloListFragment extends ListFragment
             switch(item.getItemId()){
                 case R.id.menu_contextual_borrar:
                     int cicloId = (Integer) viewSeleccionado.getTag();
-                    MusicaProveedor.delete(getActivity().getContentResolver(), cicloId);
+                    CategoriasProveedor.delete(getActivity().getContentResolver(), cicloId);
                     break;
                 case R.id.menu_contextual_editar:
-                    Intent intent = new Intent(getActivity(), CicloActualizacionActivity.class);
+                    Intent intent = new Intent(getActivity(), CategoriasActualizacionActivity.class);
                     cicloId = (Integer) viewSeleccionado.getTag();
                     Log.i("El identificador 1", "kk"+cicloId);
-                    Musica ciclo = MusicaProveedor.read(getActivity().getContentResolver(), cicloId);
-                    Log.i("El identificador", ciclo.getCompa());
-                    intent.putExtra("ID", ciclo.getId_musica());
+                    Categorias ciclo = CategoriasProveedor.read(getActivity().getContentResolver(), cicloId);
+
+                    intent.putExtra("ID", ciclo.getID());
                     intent.putExtra("Nombre", ciclo.getTitulo());
-                    intent.putExtra("Abreviatura", ciclo.getCompa());
-                    intent.putExtra("Id_Categoria", ciclo.getCategoria().getID());
+
                     startActivity(intent);
                     break;
                 default:
@@ -172,13 +173,11 @@ public class CicloListFragment extends ListFragment
         // sample only has one Loader, so we don't care about the ID.
         // First, pick the base URI to use depending on whether we are
         // currently filtering.
-        String columns[] = new String[] { Contrato.Musica._ID,
-                                          Contrato.Musica.NOMBRE,
-                                          Contrato.Musica.COMPA,
-										  Contrato.Musica.ID_CATEGORIA
+        String columns[] = new String[] { Contrato.Categorias._ID,
+                                          Contrato.Categorias.NOMBRE
                                         };
 
-        Uri baseUri = Contrato.Musica.CONTENT_URI;
+        Uri baseUri = Contrato.Categorias.CONTENT_URI;
 
         // Now create and return a CursorLoader that will take care of
         // creating a Cursor for the data being displayed.
@@ -193,7 +192,7 @@ public class CicloListFragment extends ListFragment
         // Swap the new cursor in.  (The framework will take care of closing the
         // old cursor once we return.)
 
-        Uri laUriBase = Uri.parse("content://"+Contrato.AUTHORITY+"/Musica");
+        Uri laUriBase = Uri.parse("content://"+Contrato.AUTHORITY+"/Categorias");
         data.setNotificationUri(getActivity().getContentResolver(), laUriBase);
 
         mAdapter.swapCursor(data);
@@ -213,46 +212,22 @@ public class CicloListFragment extends ListFragment
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
-            int ID = cursor.getInt(cursor.getColumnIndex(Contrato.Musica._ID));
-            String nombre = cursor.getString(cursor.getColumnIndex(Contrato.Musica.NOMBRE));
-            String abreviatura = cursor.getString(cursor.getColumnIndex(Contrato.Musica.COMPA));
-            int idCategoria = cursor.getInt(cursor.getColumnIndex(Contrato.Musica.ID_CATEGORIA));
+            int ID = cursor.getInt(cursor.getColumnIndex(Contrato.Categorias._ID));
+            String nombre = cursor.getString(cursor.getColumnIndex(Contrato.Categorias.NOMBRE));
 
-			Categorias categoria = CategoriasProveedor.read(getContext().getContentResolver(), idCategoria);
 
-            TextView textviewNombre = (TextView) view.findViewById(R.id.textview_ciclo_list_item_nombre);
-            textviewNombre.setText("Autor: "+nombre);
-
-            TextView textviewAbreviatura = (TextView) view.findViewById(R.id.textview_ciclo_list_item_abreviatura);
-            textviewAbreviatura.setText("CD: "+abreviatura);
-
-            TextView textViewCategoria = (TextView) view.findViewById(R.id.textview_ciclo_list_item_categoria);
-            textViewCategoria.setText("categoria: "+categoria.getTitulo());
-
-            ImageView image = (ImageView) view.findViewById(R.id.image_view);
-
-            try {
-                Utilidades.loadImageFromStorage(getActivity(), "img_" + ID + ".jpg", image);
-            } catch (FileNotFoundException e) {
-                ponerImagenDeLetra(abreviatura, image);
-            }
+            TextView textviewNombre = (TextView) view.findViewById(R.id.textview_categorias_list_item_nombre);
+            textviewNombre.setText(nombre);
 
             view.setTag(ID);
 
         }
 
-        private void ponerImagenDeLetra(String abreviatura, ImageView image) {
-            ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
-            int color = generator.getColor(abreviatura); //Genera un color según el nombre
-            TextDrawable drawable = TextDrawable.builder()
-                    .buildRound(abreviatura.substring(0, 1), color);
-            image.setImageDrawable(drawable);
-        }
 
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            View v = inflater.inflate(R.layout.ciclo_list_item, parent, false);
+            View v = inflater.inflate(R.layout.categorias_list_item, parent, false);
             bindView(v, context, cursor);
             return v;
         }

@@ -77,7 +77,7 @@ public class MusicaProveedor {
 
             int categoriaID = cursor.getInt(cursor.getColumnIndex(Contrato.Musica.ID_CATEGORIA));
             Categorias cate = CategoriasProveedor.read(resolver, categoriaID);
-            cate.setID(categoriaID);
+            ciclo.setCategoria(cate);
 
             return ciclo;
         }

@@ -28,4 +28,15 @@ public class Contrato {
 
     }
 
+    public static final class ListaMusicas implements BaseColumns {
+
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://"+AUTHORITY+"/Lista");
+
+        // Table column
+        public static final String ID_MUSICA = "Id_Musica";
+        public static final String SUSCRIPTORES = "Suscriptores";
+
+    }
+
 }

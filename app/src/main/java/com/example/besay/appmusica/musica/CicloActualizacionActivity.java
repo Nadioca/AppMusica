@@ -51,12 +51,12 @@ public class CicloActualizacionActivity extends AppCompatActivity {
         editTextCicloCategoria = (EditText) findViewById(R.id.editTextCicloCategoria);
 
         cicloId = this.getIntent().getExtras().getInt("ID");
+        int id_cat = this.getIntent().getExtras().getInt("Id_Categoria");
+
         editTextCicloNombre.setText(this.getIntent().getExtras().getString("Nombre"));
         editTextCicloAbreviatura.setText(this.getIntent().getExtras().getString("Abreviatura"));
 
-        int categoria = this.getIntent().getExtras().getInt("Id_Categoria");
-
-        editTextCicloCategoria.setText(String.valueOf(categoria));
+        editTextCicloCategoria.setText(String.valueOf(id_cat));
 
         imageViewCiclo = (ImageView) findViewById(R.id.image_view_ciclo);
 
@@ -143,10 +143,12 @@ public class CicloActualizacionActivity extends AppCompatActivity {
     void attemptGuardar(){
         editTextCicloNombre.setError(null);
         editTextCicloAbreviatura.setError(null);
+        editTextCicloCategoria.setError(null);
 
 
         String nombre = String.valueOf(editTextCicloNombre.getText());
         String abreviatura = String.valueOf(editTextCicloAbreviatura.getText());
+        String cate = String.valueOf(editTextCicloCategoria.getText());
 
         if(TextUtils.isEmpty(nombre)){
             editTextCicloNombre.setError(getString(R.string.campo_requerido));
@@ -159,10 +161,16 @@ public class CicloActualizacionActivity extends AppCompatActivity {
             editTextCicloAbreviatura.requestFocus();
             return;
         }
+
+        if(TextUtils.isEmpty(cate)){
+            editTextCicloCategoria.setError(getString(R.string.campo_requerido));
+            editTextCicloCategoria.requestFocus();
+            return;
+        }
+
         Integer categoria = Integer.parseInt(editTextCicloCategoria.getText().toString());
 
         Categorias categorias = CategoriasProveedor.read(getContentResolver(), categoria);
-
 
         Musica ciclo = new Musica(cicloId, nombre, abreviatura, categorias, foto);
         MusicaProveedor.update(getContentResolver(), ciclo, this);

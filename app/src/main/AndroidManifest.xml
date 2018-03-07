@@ -112,6 +112,75 @@
                 android:value=".musica.CicloActivity" />
         </activity>
 
+        <activity
+            android:name=".categorias.CategoriaActivity"
+            android:label="Categorias Musicales"
+            android:parentActivityName=".PrincipalActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.besay.appmusica.PrincipalActivity" />
+        </activity>
+
+        <activity
+            android:name=".categorias.CategoriasInsercionActivity"
+            android:parentActivityName=".categorias.CategoriaActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".categorias.CategoriaActivity" />
+        </activity>
+
+        <activity
+            android:name=".categorias.CategoriasActualizacionActivity"
+            android:parentActivityName=".categorias.CategoriaActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".categorias.CategoriaActivity" />
+        </activity>
+
+        <activity
+            android:name=".ListaMusicas.ListaActivity"
+            android:label="Tu lista de Canciones"
+            android:parentActivityName=".PrincipalActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.besay.appmusica.PrincipalActivity" />
+        </activity>
+
+        <activity
+            android:name=".ListaMusicas.ListaInsercionActivity"
+            android:parentActivityName=".ListaMusicas.ListaActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListaMusicas.ListaActivity" />
+        </activity>
+
+        <activity
+            android:name=".ListaMusicas.ListaActualizacionActivity"
+            android:parentActivityName=".ListaMusicas.ListaActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListaMusicas.ListaActivity" />
+        </activity>
+
+
         <provider
             android:name=".proveedor.ProveedorDeContenido"
             android:authorities="com.example.besay.appmusica.proveedor.ProveedorDeContenido"

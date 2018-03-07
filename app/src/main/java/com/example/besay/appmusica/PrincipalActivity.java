@@ -26,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.besay.appmusica.ListaMusicas.ListaActivity;
+import com.example.besay.appmusica.categorias.CategoriaActivity;
 import com.example.besay.appmusica.constantes.Utilidades;
 import com.example.besay.appmusica.musica.CicloActivity;
 import com.example.besay.appmusica.pojos.Musica;
@@ -115,11 +117,29 @@ public class PrincipalActivity extends AppCompatActivity
 
         imageView = (ImageView) findViewById(R.id.view_mi_foto);
 
-        Button botonDescarga = (Button) findViewById(R.id.buttonIrAMiMusicaWeb);
-        botonDescarga.setOnClickListener(new View.OnClickListener() {
+//        Button botonDescarga = (Button) findViewById(R.id.buttonIrAMiMusicaWeb);
+//        botonDescarga.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                descargarDatos();
+//            }
+//        });
+
+        Button botonCategorias = (Button) findViewById(R.id.buttonCategorias);
+        botonCategorias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                descargarDatos();
+                Intent intent = new Intent(contexto, CategoriaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button botonLista = (Button) findViewById(R.id.buttonListaMusicas);
+        botonLista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(contexto, ListaActivity.class);
+                startActivity(intent);
             }
         });
 

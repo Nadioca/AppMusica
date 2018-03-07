@@ -23,13 +23,18 @@ public class ProveedorDeContenido extends ContentProvider {
     private static final int CATEGORIAS_ONE_REG = 10;
     private static final int CATEGORIAS_ALL_REGS = 20;
 
+    private static final int LISTA_ONE_REG = 100;
+    private static final int LISTA_ALL_REGS = 200;
+    private static final int LISTA_MUSICAS_REG = 300;
+
     private SQLiteDatabase sqlDB;
     public DatabaseHelper dbHelper;
     private static final String DATABASE_NAME = "Musica.db";
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 12;
 
     private static final String Musica_TABLE_NAME = "Musica";
     private static final String CATEGORIAS_TABLE_NAME = "Categorias";
+    private static final String LISTA_TABLE_NAME = "Lista";
 
     // Indicates an invalid content URI
     public static final int INVALID_URI = -1;
@@ -83,6 +88,19 @@ public class ProveedorDeContenido extends ContentProvider {
                 CATEGORIAS_TABLE_NAME + "/#",
                 CATEGORIAS_ONE_REG);
 
+        sUriMatcher.addURI(
+                Contrato.AUTHORITY,
+                LISTA_TABLE_NAME,
+                LISTA_ALL_REGS);
+        sUriMatcher.addURI(
+                Contrato.AUTHORITY,
+                LISTA_TABLE_NAME + "/#",
+                LISTA_ONE_REG);
+        sUriMatcher.addURI(
+                Contrato.AUTHORITY,
+                LISTA_TABLE_NAME + "/MUSICA",
+                LISTA_MUSICAS_REG);
+
         // Specifies a custom MIME type for the picture URL table
 
         sMimeTypes.put(
@@ -107,6 +125,23 @@ public class ProveedorDeContenido extends ContentProvider {
                 CATEGORIAS_ONE_REG,
                 "vnd.android.cursor.item/vnd."+
                         Contrato.AUTHORITY + "." + CATEGORIAS_TABLE_NAME);
+
+        //Lista musicas
+
+        sMimeTypes.put(
+                LISTA_ALL_REGS,
+                "vnd.android.cursor.dir/vnd." +
+                        Contrato.AUTHORITY + "." + LISTA_TABLE_NAME);
+        sMimeTypes.put(
+                LISTA_ONE_REG,
+                "vnd.android.cursor.item/vnd."+
+                        Contrato.AUTHORITY + "." + LISTA_TABLE_NAME);
+        sMimeTypes.put(
+                LISTA_MUSICAS_REG,
+                "vnd.android.cursor.dir/vnd."+
+                        Contrato.AUTHORITY + "." + LISTA_TABLE_NAME + "." + Musica_TABLE_NAME );
+
+
     }
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
@@ -143,7 +178,16 @@ public class ProveedorDeContenido extends ContentProvider {
                     + Contrato.Musica.COMPA + " TEXT , "
                     + Contrato.Musica.ID_CATEGORIA + " INTEGER , "
                     + "FOREIGN KEY (" + Contrato.Musica.ID_CATEGORIA + ") "
-                    + "REFERENCES " + CATEGORIAS_TABLE_NAME + " (" + Contrato.Categorias._ID + "));"
+                    + "REFERENCES " + CATEGORIAS_TABLE_NAME + " (" + Contrato.Categorias._ID + ") ON DELETE CASCADE);"
+            );
+
+            db.execSQL("Create table "
+                    + LISTA_TABLE_NAME
+                    + "( _id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, "
+                    + Contrato.ListaMusicas.ID_MUSICA + " INTEGER , "
+                    + Contrato.ListaMusicas.SUSCRIPTORES + " INTEGER , "
+                    + "FOREIGN KEY (" + Contrato.ListaMusicas.ID_MUSICA + ") "
+                    + "REFERENCES " + Musica_TABLE_NAME + " (" + Contrato.Musica._ID + ") ON DELETE CASCADE);"
             );
 
             inicializarDatos(db);
@@ -167,12 +211,23 @@ public class ProveedorDeContenido extends ContentProvider {
                     "VALUES (3,'Camila Cabello','Havana',2)");
             db.execSQL("INSERT INTO " + Musica_TABLE_NAME + " (" +  Contrato.Musica._ID + "," + Contrato.Musica.NOMBRE + "," + Contrato.Musica.COMPA + "," + Contrato.Musica.ID_CATEGORIA + ") " +
                     "VALUES (4,'U2','Best Friends',2)");
+
+            db.execSQL("INSERT INTO " + LISTA_TABLE_NAME + " (" +  Contrato.ListaMusicas._ID
+                    + "," + Contrato.ListaMusicas.ID_MUSICA
+                    + "," + Contrato.ListaMusicas.SUSCRIPTORES + ") "
+                    + "VALUES (1,1,120)");
+
+            db.execSQL("INSERT INTO " + LISTA_TABLE_NAME + " (" +  Contrato.ListaMusicas._ID
+                    + "," + Contrato.ListaMusicas.ID_MUSICA
+                    + "," + Contrato.ListaMusicas.SUSCRIPTORES + ") "
+                    + "VALUES (2,2,534)");
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE IF EXISTS " + CATEGORIAS_TABLE_NAME);
 			db.execSQL("DROP TABLE IF EXISTS " + Musica_TABLE_NAME);
+			db.execSQL("DROP TABLE IF EXISTS " + LISTA_TABLE_NAME);
 
             onCreate(db);
         }
@@ -210,6 +265,9 @@ public class ProveedorDeContenido extends ContentProvider {
                 break;
             case CATEGORIAS_ALL_REGS:
                 table = CATEGORIAS_TABLE_NAME;
+                break;
+            case LISTA_ALL_REGS:
+                table = LISTA_TABLE_NAME;
                 break;
         }
 
@@ -249,6 +307,16 @@ public class ProveedorDeContenido extends ContentProvider {
                 break;
             case CATEGORIAS_ALL_REGS:
                 table = CATEGORIAS_TABLE_NAME;
+                break;
+
+            case LISTA_ONE_REG:
+                if (null == selection) selection = "";
+                selection += Contrato.Categorias._ID + " = "
+                        + uri.getLastPathSegment();
+                table = LISTA_TABLE_NAME;
+                break;
+            case LISTA_ALL_REGS:
+                table = LISTA_TABLE_NAME;
                 break;
         }
         int rows = sqlDB.delete(table, selection, selectionArgs);
@@ -302,6 +370,29 @@ public class ProveedorDeContenido extends ContentProvider {
                         Contrato.Categorias._ID + " ASC";
                 qb.setTables(CATEGORIAS_TABLE_NAME);
                 break;
+
+            case LISTA_ONE_REG:
+                if (null == selection) selection = "";
+                selection += Contrato.ListaMusicas._ID + " = "
+                        + uri.getLastPathSegment();
+                qb.setTables(LISTA_TABLE_NAME);
+                break;
+            case LISTA_ALL_REGS:
+                if (TextUtils.isEmpty(sortOrder)) sortOrder =
+                        Contrato.ListaMusicas._ID + " ASC";
+                qb.setTables(LISTA_TABLE_NAME);
+                break;
+            case LISTA_MUSICAS_REG:
+                String sql2 = "SELECT " +
+                        Contrato.ListaMusicas._ID + "," +
+                        Contrato.ListaMusicas.SUSCRIPTORES + "," +
+                        Contrato.Musica.NOMBRE + " AS NOMBRE_MUSICA" + " FROM " +
+                        LISTA_TABLE_NAME +
+                        " INNER JOIN " + Musica_TABLE_NAME +
+                        " ON " + Contrato.ListaMusicas.ID_MUSICA + " = " + Contrato.Musica._ID;
+                Cursor d;
+                d = db.rawQuery(sql2, null);
+                return d;
         }
 
         Cursor c;
@@ -337,6 +428,16 @@ public class ProveedorDeContenido extends ContentProvider {
                 break;
             case CATEGORIAS_ALL_REGS:
                 table = CATEGORIAS_TABLE_NAME;
+                break;
+
+            case LISTA_ONE_REG:
+                if (null == selection) selection = "";
+                selection += Contrato.Musica._ID + " = "
+                        + uri.getLastPathSegment();
+                table = LISTA_TABLE_NAME;
+                break;
+            case LISTA_ALL_REGS:
+                table = LISTA_TABLE_NAME;
                 break;
         }
 

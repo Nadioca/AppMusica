@@ -11,7 +11,7 @@ import com.example.besay.appmusica.pojos.Categorias;
 
 public class CategoriasProveedor {
     static public void insert(ContentResolver resolvedor, Categorias categoria, Context contexto){
-        Uri uri = Contrato.Musica.CONTENT_URI;
+        Uri uri = Contrato.Categorias.CONTENT_URI;
 
         ContentValues values = new ContentValues();
         values.put(Contrato.Categorias.NOMBRE, categoria.getTitulo());
@@ -27,10 +27,10 @@ public class CategoriasProveedor {
     }
 
     static public void update(ContentResolver resolver, Categorias categorias, Context contexto){
-        Uri uri = Uri.parse(Contrato.Musica.CONTENT_URI + "/" + categorias.getID());
+        Uri uri = Uri.parse(Contrato.Categorias.CONTENT_URI + "/" + categorias.getID());
 
         ContentValues values = new ContentValues();
-        values.put(Contrato.Musica.NOMBRE, categorias.getTitulo());
+        values.put(Contrato.Categorias.NOMBRE, categorias.getTitulo());
 
         resolver.update(uri, values, null, null);
 

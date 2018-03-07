@@ -26,8 +26,15 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver toda la Música Web"
-        android:id="@+id/buttonIrAMiMusicaWeb"/>
+        android:text="Ver todas la Categorias Musicales"
+        android:id="@+id/buttonCategorias"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver mi lista de Musica"
+        android:id="@+id/buttonListaMusicas"/>
 
     <Button
         android:layout_marginTop="20dp"

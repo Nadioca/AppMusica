@@ -13,55 +13,43 @@ import java.util.Date;
 public class Lista_Musica {
 
     private int id_lista;
-    private String titulo;
-    private String creador;
-    private Date fecha_creado;
+    private Musica musica;
+    private int suscriptores;
 
 
     public Lista_Musica() {
         this.id_lista = Constantes.SIN_VALOR_INT;
-        this.titulo = Constantes.SIN_VALOR_STRING;
-        this.setCreador(Constantes.SIN_VALOR_STRING);
-        this.setFecha_creado(null);
-
+        this.musica = null;
+        this.suscriptores = Constantes.SIN_VALOR_INT;
     }
 
-    public Lista_Musica(int ID, String nombre, String abreviatura, Date fecha_creado) {
+    public Lista_Musica(int ID, Musica musica, int suscriptores) {
         this.id_lista = ID;
-        this.titulo = nombre;
-        this.setCreador(abreviatura);
-        this.setFecha_creado(fecha_creado);
+        this.musica = musica;
+        this.suscriptores = suscriptores;
     }
 
-    public int getId_musica() {
+    public int getId_lista() {
         return id_lista;
     }
 
-    public void setId_musica(int id_musica) {
-        this.id_lista = id_musica;
+    public void setId_lista(int id_lista) {
+        this.id_lista = id_lista;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public Musica getMusica() {
+        return musica;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setMusica(Musica musica) {
+        this.musica = musica;
     }
 
-    public String getCreador() {
-        return creador;
+    public int getSuscriptores() {
+        return suscriptores;
     }
 
-    public void setCreador(String creador) {
-        this.creador = creador;
-    }
-
-    public Date getFecha_creado() {
-        return fecha_creado;
-    }
-
-    public void setFecha_creado(Date fecha_creado) {
-        this.fecha_creado = fecha_creado;
+    public void setSuscriptores(int suscriptores) {
+        this.suscriptores = suscriptores;
     }
 }
